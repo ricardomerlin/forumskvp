@@ -62,7 +62,7 @@ async function getAccessTokenFromSpot(spotId) {
   });
 
   await page.goto(
-    `http://localhost:3000/dynamic?spotId=${spotId}&postId=no_post`,
+    `https://forumskvp.onrender.com/dynamic?spotId=${spotId}&postId=no_post`,
     { waitUntil: "networkidle2" }
   );
 
@@ -116,5 +116,5 @@ app.post("/run", async (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log("Server running at http://localhost:3000");
+  console.log("Server running at https://forumskvp.onrender.com");
 });
