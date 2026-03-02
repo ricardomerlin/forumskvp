@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spot Categories Fetcher</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 40px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    pre {
+      margin-top: 20px;
+      background: #111;
+      color: #0f0;
+      padding: 15px;
+      overflow-x: auto;
+      max-height: 400px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Spot Categories Fetcher</h2>
+
+    <input type="text" id="spotId" placeholder="Enter Spot ID (e.g. sp_XXXXX)" />
+    <button onclick="run()">Run</button>
+
+    <pre id="output"></pre>
+  </div>
+
+  <script>
+    async function run() {
+      const spotId = document.getElementById("spotId").value;
+      const output = document.getElementById("output");
+  
+      output.textContent = "Loading...";
+  
+      try {
+        const response = await fetch("/run", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ spotId })
+        });
+  
+        const text = await response.text();
+        output.textContent = text;
+  
+      } catch (err) {
+        output.textContent = "Error: " + err.message;
+      }
+    }
+  </script>
+
+</body>
+</html>
